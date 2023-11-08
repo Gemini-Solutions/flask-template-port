@@ -1,6 +1,6 @@
 node('image_builder_trivy') { 
    stage('flask_app_checkout') {
-         dir ('flask_backend') {
+         dir ('{{cookiecutter.app_name}}') {
          checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg:  [], \
 userRemoteConfigs: [[credentialsId: 'admingithub', url: 'git@github.com:Gemini-Solutions/{{cookiecutter.app_name}}.git']]])
          }
