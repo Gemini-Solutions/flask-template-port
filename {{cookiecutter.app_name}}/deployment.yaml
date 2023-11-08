@@ -20,7 +20,7 @@ spec:
       - name: {{cookiecutter.app_name}}
         image: registry-np.geminisolutions.com/{{cookiecutter.app_name}}/{{cookiecutter.app_name}}
         ports:
-        - name: {{cookiecutter.app_name}}
+        - name: http
           containerPort: 8080
         imagePullPolicy: Always
       imagePullSecrets:
