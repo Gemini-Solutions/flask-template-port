@@ -11,6 +11,7 @@ userRemoteConfigs: [[credentialsId: 'admingithub', url: 'git@github.com:Gemini-S
               container('docker-image-builder-trivy') {
                 withCredentials([usernamePassword(credentialsId: 'docker_registry', passwordVariable: 'docker_pass', usernameVariable: 'docker_user')]) {
                    sh '''docker login -u $docker_user -p $docker_pass https://registry-np.geminisolutions.com'''
+			  sh 'docker build -f Dockerfile -t registry-np.geminisolutions.com/{{cookiecutter.app_name}}/{{cookiecutter.app_name}}:1.0-$BUILD_NUMBER -t registry-np.geminisolutions.com/{{cookiecutter.app_name}}/{{cookiecutter.app_name}} .'   
               sh 'docker push registry-np.geminisolutions.com/{{cookiecutter.app_name}}/{{cookiecutter.app_name}}:1.0-$BUILD_NUMBER'
               sh 'docker push registry-np.geminisolutions.com/{{cookiecutter.app_name}}/{{cookiecutter.app_name}}'
            }
