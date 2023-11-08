@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{cookiecutter.app_name}}
+  namespace: dev
+  labels:
+    app: {{cookiecutter.app_name}}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: {{cookiecutter.app_name}}
+  template:
+    metadata:
+      labels:
+        app: {{cookiecutter.app_name}}
+    spec:
+      containers:
+      - name: {{cookiecutter.app_name}}
+        image: registry-np.geminisolutions.com/{{cookiecutter.app_name}}/{{cookiecutter.app_name}}
+        ports:
+        - name: {{cookiecutter.app_name}}
+          containerPort: 8080
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: regcred
